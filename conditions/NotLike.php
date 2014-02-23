@@ -15,7 +15,7 @@ namespace dosamigos\arrayquery\conditions;
  * @link http://www.2amigos.us/
  * @package dosamigos\arrayquery\conditions
  */
-class NotLike extends Condition
+class NotLike extends Like
 {
 	/**
 	 * @inheritdoc

@@ -21,6 +21,6 @@ class Equal extends Condition {
 	 * @inheritdoc
 	 */
 	public function matches($data) {
-		return (($this->checkType($data, $this->value) && $data === $this->value) xor $this->negate);
+		return (($this->checkType($data, $this->value) && strcmp($data, $this->value) === 0 ) xor $this->negate);
 	}
 } 

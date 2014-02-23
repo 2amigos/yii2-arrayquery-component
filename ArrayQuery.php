@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
  * @link http://www.2amigos.us/
  * @package dosamigos\arrayquery
  */
-class ArrayQuery extends Component
+class ArrayQuery
 {
 	/**
 	 * @var array the data to search, filter.
@@ -63,7 +63,7 @@ class ArrayQuery extends Component
 	 */
 	public function addCondition($key, $value, $operator = 'and')
 	{
-		$operator = strcasecmp($operator, 'or') === 0 ? 'and' : 'or';
+		$operator = strcasecmp($operator, 'or') !== 0 ? 'and' : 'or';
 		if (preg_match('/^(?:\s*(<>|<=|>=|<|>|=|~|n~|like|nlike))?(.*)$/i', $value, $matches)) {
 			$operation = $matches[1];
 			$value = trim($matches[2]);
@@ -177,7 +177,7 @@ class ArrayQuery extends Component
 	 */
 	private function matches($data) {
 		$matches = true;
-		$conditions = ArrayHelper::getValue($this->_conditions, 'and', []);
+		$conditions = isset($this->_conditions['and'])? $this->_conditions['and'] : [];
 		foreach($conditions as $condition) {
 			$key = $condition['key'];
 			$condition = $condition['condition'];
@@ -186,17 +186,15 @@ class ArrayQuery extends Component
 				break;
 			}
 		}
-		if(!$matches) {
-			$conditions = ArrayHelper::getValue($this->_conditions, 'or', []);
-			foreach($conditions as $condition) {
-				$key = $condition['key'];
-				$condition = $condition['condition'];
-				if(!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
-					$matches = false;
-					continue;
-				}
-				$matches = true;
+		$conditions = isset($this->_conditions['or']) ? $this->_conditions['or'] : [];
+		foreach($conditions as $condition) {
+			$key = $condition['key'];
+			$condition = $condition['condition'];
+			if(!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
+				$matches = false;
+				continue;
 			}
+			$matches = true;
 		}
 		return $matches;
 	}

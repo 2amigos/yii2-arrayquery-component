@@ -32,7 +32,7 @@ class LessThanOrEqual extends Condition
 	 */
 	public function matches($data)
 	{
-		$gt = new GreaterThan($this->value);
+		$gt = new LessThan($this->value);
 		$e = new Equal($this->value);
 
 		return $gt->matches($data) || $e->matches($data);
