@@ -177,7 +177,6 @@ class ArrayQuery extends Component
 	 */
 	private function matches($data) {
 		$matches = true;
-		/* @var \dosamigos\arrayquery\conditions\Condition $condition */
 		$conditions = ArrayHelper::getValue($this->_conditions, 'and', []);
 		foreach($conditions as $condition) {
 			$key = $condition['key'];
