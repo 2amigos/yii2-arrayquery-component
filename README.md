@@ -1,7 +1,8 @@
 ArrayQuery Component for Yii2
 ======================
 
-Allows filtering of an array
+Allows searching/filtering of an array. This component is very useful when displaying array data in GridViews with an
+ArrayDataProvider.
 
 Installation
 ------------
