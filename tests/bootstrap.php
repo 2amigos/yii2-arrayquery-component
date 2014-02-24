@@ -1,5 +1,5 @@
 <?php
-include_once('AutoLoader.php');
+include_once('Autoloader.php');
 // Register the directory to your include files
 AutoLoader::registerClass('dosamigos\arrayquery\ArrayQuery', __DIR__ . '/../ArrayQuery.php');
 AutoLoader::registerClass('dosamigos\arrayquery\conditions\Condition', __DIR__ . '/../conditions/Condition.php');
