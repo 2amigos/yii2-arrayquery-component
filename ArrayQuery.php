@@ -63,47 +63,47 @@ class ArrayQuery
 	 */
 	public function addCondition($key, $value, $operator = 'and')
 	{
-		$operator = strcasecmp($operator, 'or') !== 0 ? 'and' : 'or';
-		if (preg_match('/^(?:\s*(<>|<=|>=|<|>|=|~|n~|like|nlike))?(.*)$/i', $value, $matches)) {
-			$operation = $matches[1];
-			$value = trim($matches[2]);
-		} else {
-			$operation = '=';
+		if ($value != null) { // not accepting null values
+
+			$operator = strcasecmp($operator, 'or') !== 0 ? 'and' : 'or';
+			if (preg_match('/^(?:\s*(<>|<=|>=|<|>|=|~|n~|like|nlike))?(.*)$/i', $value, $matches)) {
+				$operation = $matches[1];
+				$value = trim($matches[2]);
+			} else {
+				$operation = '=';
+			}
+			$condition = null;
+			switch ($operation) {
+				case '<':
+					$condition = new LessThan($value);
+					break;
+				case '>':
+					$condition = new GreaterThan($value);
+					break;
+				case '<>':
+					$condition = new Equal($value);
+					$condition->reverse();
+					break;
+				case '<=':
+					$condition = new LessThanOrEqual($value);
+					break;
+				case '>=':
+					$condition = new GreaterThanOrEqual($value);
+					break;
+				case '~':
+				case 'like':
+					$condition = new Like($value);
+					break;
+				case 'n~':
+				case 'nlike':
+					$condition = new NotLike($value);
+					break;
+				case '=':
+				default:
+					$condition = new Equal($value);
+			}
+			$this->_conditions[$operator][] = ['condition' => $condition, 'key' => $key];
 		}
-		$condition = null;
-		switch ($operation) {
-			case '<':
-				$condition = new LessThan($value);
-				break;
-			case '>':
-				$condition = new GreaterThan($value);
-				break;
-			case '<>':
-				$condition = new Equal($value);
-				$condition->reverse();
-				break;
-			case '<=':
-				$condition = new LessThanOrEqual($value);
-				break;
-			case '>=':
-				$condition = new GreaterThanOrEqual($value);
-				break;
-			case '~':
-			case 'like':
-				$condition = new Like($value);
-				break;
-			case 'n~':
-			case 'nlike':
-				$condition = new NotLike($value);
-				break;
-			case '=':
-			default:
-				$condition = new Equal($value);
-
-		}
-
-		$this->_conditions[$operator][] = ['condition' => $condition, 'key' => $key];
-
 		return $this;
 	}
 
@@ -113,8 +113,8 @@ class ArrayQuery
 	 */
 	public function one()
 	{
-		foreach($this->_tokens as $key => $token) {
-			if(!$this->matches($token)) {
+		foreach ($this->_tokens as $key => $token) {
+			if (!$this->matches($token)) {
 				continue;
 			}
 			return $this->_data[$key];
@@ -128,12 +128,12 @@ class ArrayQuery
 	 */
 	public function find()
 	{
-		if(empty($this->_conditions)) {
+		if (empty($this->_conditions)) {
 			return $this->_data;
 		}
 		$results = [];
-		foreach($this->_tokens as $key => $token) {
-			if(!$this->matches($token)) {
+		foreach ($this->_tokens as $key => $token) {
+			if (!$this->matches($token)) {
 				continue;
 			}
 			$results[$key] = $this->_data[$key];
@@ -160,7 +160,7 @@ class ArrayQuery
 				}
 			} elseif (is_object($items)) {
 				$addParent && $paths[$px . $key] = $items;
-				foreach($this->tokenize(get_object_vars($items), $px . $key) as $k => $path) {
+				foreach ($this->tokenize(get_object_vars($items), $px . $key) as $k => $path) {
 					$paths[$k] = $path;
 				}
 			} else {
@@ -175,22 +175,23 @@ class ArrayQuery
 	 * @param mixed $data the data to match against.
 	 * @return bool true if matches condition
 	 */
-	private function matches($data) {
+	private function matches($data)
+	{
 		$matches = true;
-		$conditions = isset($this->_conditions['and'])? $this->_conditions['and'] : [];
-		foreach($conditions as $condition) {
+		$conditions = isset($this->_conditions['and']) ? $this->_conditions['and'] : [];
+		foreach ($conditions as $condition) {
 			$key = $condition['key'];
 			$condition = $condition['condition'];
-			if(!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
+			if (!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
 				$matches = false;
 				break;
 			}
 		}
 		$conditions = isset($this->_conditions['or']) ? $this->_conditions['or'] : [];
-		foreach($conditions as $condition) {
+		foreach ($conditions as $condition) {
 			$key = $condition['key'];
 			$condition = $condition['condition'];
-			if(!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
+			if (!array_key_exists($key, $data) || !$condition->matches($data[$key])) {
 				$matches = false;
 				continue;
 			}
