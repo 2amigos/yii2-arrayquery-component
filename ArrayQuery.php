@@ -150,7 +150,7 @@ class ArrayQuery
 	 */
 	public function tokenize($array, $prefix = '', $addParent = true)
 	{
-		$paths = array();
+		$paths = [];
 		$px = empty($prefix) ? null : $prefix . ".";
 		foreach ($array as $key => $items) {
 			if (is_array($items)) {
