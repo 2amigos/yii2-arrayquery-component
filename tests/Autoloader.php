@@ -56,6 +56,3 @@ class AutoLoader
 		}
 	}
 }
-
-// register loader
-spl_autoload_register(array('AutoLoader', 'loadClass'));
