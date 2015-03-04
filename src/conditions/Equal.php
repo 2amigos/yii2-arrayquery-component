@@ -15,12 +15,14 @@ namespace dosamigos\arrayquery\conditions;
  * @link http://www.2amigos.us/
  * @package dosamigos\arrayquery\conditions
  */
-class Equal extends Condition {
+class Equal extends Condition
+{
 
-	/**
-	 * @inheritdoc
-	 */
-	public function matches($data) {
-		return (($this->checkType($data, $this->value) && strcmp($data, $this->value) === 0 ) xor $this->negate);
-	}
-} 
+    /**
+     * @inheritdoc
+     */
+    public function matches($data)
+    {
+        return (($this->checkType($data, $this->value) && strcmp($data, $this->value) === 0) xor $this->negate);
+    }
+}

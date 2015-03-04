@@ -17,22 +17,22 @@ namespace dosamigos\arrayquery\conditions;
 class GreaterThan extends Condition
 {
 
-	/**
-	 * Returns [[LessThan]] condition
-	 * @return LessThan
-	 */
-	public function reverse()
-	{
-		return new LessThan($this->value);
-	}
+    /**
+     * Returns [[LessThan]] condition
+     * @return LessThan
+     */
+    public function reverse()
+    {
+        return new LessThan($this->value);
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function matches($data)
-	{
-		return ($this->checkType($data, $this->value) && $data > $this->value);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function matches($data)
+    {
+        return ($this->checkType($data, $this->value) && $data > $this->value);
+    }
 
-} 
+}

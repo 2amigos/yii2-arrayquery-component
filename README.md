@@ -1,7 +1,12 @@
 ArrayQuery Component for Yii2
 =============================
-[![Latest Stable Version](https://poser.pugx.org/2amigos/yii2-arrayquery-component/v/stable.png)](https://packagist.org/packages/2amigos/yii2-arrayquery-component)
-[![Build Status](https://travis-ci.org/2amigos/yii2-arrayquery-component.png?branch=master)](https://travis-ci.org/2amigos/yii2-arrayquery-component)
+
+[![Latest Version](https://img.shields.io/github/release/2amigos/yii2-arrayquery-component.svg?style=flat-square)](https://github.com/2amigos/yii2-arrayquery-component/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/2amigos/yii2-arrayquery-component/master.svg?style=flat-square)](https://travis-ci.org/2amigos/yii2-arrayquery-component)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/2amigos/yii2-arrayquery-component.svg?style=flat-square)](https://scrutinizer-ci.com/g/2amigos/yii2-arrayquery-component/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/2amigos/yii2-arrayquery-component.svg?style=flat-square)](https://scrutinizer-ci.com/g/2amigos/yii2-arrayquery-component)
+[![Total Downloads](https://img.shields.io/packagist/dt/2amigos/yii2-arrayquery-component.svg?style=flat-square)](https://packagist.org/packages/2amigos/yii2-arrayquery-component)
 
 Allows searching/filtering of an array. This component is very useful when displaying array data in GridViews with an
 ArrayDataProvider.
@@ -47,6 +52,25 @@ $dataProvider = new ArrayDataProvider([
 ]);
 
 ```
+
+## Testing
+
+``` bash
+$ phpunit
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Credits
+
+- [Antonio Ramirez](https://github.com/tonydspaniard)
+- [All Contributors](../../contributors)
+
+## License
+
+The BSD License (BSD). Please see [License File](LICENSE.md) for more information.
 
 
 > [![2amigOS!](http://www.gravatar.com/avatar/55363394d72945ff7ed312556ec041e0.png)](http://www.2amigos.us)

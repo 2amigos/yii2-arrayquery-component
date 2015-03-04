@@ -18,24 +18,24 @@ namespace dosamigos\arrayquery\conditions;
 class LessThanOrEqual extends Condition
 {
 
-	/**
-	 * Returns [[GreaterThanOrEqual]] condition
-	 * @return GreaterThanOrEqual
-	 */
-	public function reverse()
-	{
-		return new GreaterThanOrEqual($this->value);
-	}
+    /**
+     * Returns [[GreaterThanOrEqual]] condition
+     * @return GreaterThanOrEqual
+     */
+    public function reverse()
+    {
+        return new GreaterThanOrEqual($this->value);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function matches($data)
-	{
-		$gt = new LessThan($this->value);
-		$e = new Equal($this->value);
+    /**
+     * @inheritdoc
+     */
+    public function matches($data)
+    {
+        $gt = new LessThan($this->value);
+        $e = new Equal($this->value);
 
-		return $gt->matches($data) || $e->matches($data);
-	}
+        return $gt->matches($data) || $e->matches($data);
+    }
 
-} 
+}
