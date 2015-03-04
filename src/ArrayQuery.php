@@ -68,15 +68,16 @@ class ArrayQuery
         if ($value != null) { // not accepting null values
             $operation = null;
             $operator = strcasecmp($operator, 'or') !== 0 ? 'and' : 'or';
+
             if (preg_match('/^(?:\s*(<>|<=|>=|<|>|=|~|n~|like|nlike))?(.*)$/i', $value, $matches)) {
                 $operation = $matches[1];
                 $value = trim($matches[2]);
             }
 
-            if(empty($operation) || strlen($operation) > 5) {
+            if (empty($operation) || strlen($operation) > 5) {
                 $operation = '=';
             }
-            $condition = null;
+
             switch ($operation) {
                 case '<':
                     $condition = new LessThan($value);
@@ -206,5 +207,4 @@ class ArrayQuery
         }
         return $matches;
     }
-
 }
