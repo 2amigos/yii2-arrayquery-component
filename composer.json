@@ -3,7 +3,7 @@
     "description": "Yii2 component that allows for searching/filtering the elements of an array.",
     "type": "yii2-extension",
     "keywords": [
-        "dosamigos",
+        "2amigos",
         "yii",
         "yii2",
         "yii 2",
@@ -11,7 +11,7 @@
         "component",
         "arrayquery"
     ],
-    "homepage": "http://yiiwheels.com/extension/array-query-component",
+    "homepage": "http://yiiwheels.com/extension/arrayquery-component",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -27,23 +27,19 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/dosamigos/:package_name/issues",
-        "source": "https://github.com/dosamigos/:package_name"
+        "issues": "https://github.com/dosamigos/yii2-arrayquery-component/issues",
+        "source": "https://github.com/dosamigos/yii2-arrayquery-component"
     },
     "require": {
         "yiisoft/yii2": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "scrutinizer/ocular": "~1.1"
     },
     "autoload": {
         "psr-4": {
             "dosamigos\\arrayquery\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "dosamigos\\arrayquery\\tests\\": "tests"
         }
     },
     "extra": {
