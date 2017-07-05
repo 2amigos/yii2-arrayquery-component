@@ -3,7 +3,7 @@
  *
  * ArrayQueryTest
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @author Antonio Ramirez <hola@2amigos.us>
  * @link http://www.ramirezcobos.com/
  * @link http://www.2amigos.us/
  */

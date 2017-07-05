@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2013-2015 2amigOS! Consulting Group LLC
+ * @copyright Copyright (c) 2013-2017 2amigos! Consulting Group LLC
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
@@ -13,13 +13,11 @@ use dosamigos\arrayquery\conditions\LessThan;
 use dosamigos\arrayquery\conditions\LessThanOrEqual;
 use dosamigos\arrayquery\conditions\Like;
 use dosamigos\arrayquery\conditions\NotLike;
-use yii\base\Component;
-use yii\helpers\ArrayHelper;
 
 /**
  * ArrayQuery allows to filter an array by apply conditions.
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @author Antonio Ramirez <hola@2amigos.us>
  * @link http://www.ramirezcobos.com/
  * @link http://www.2amigos.us/
  * @package dosamigos\arrayquery
@@ -29,15 +27,15 @@ class ArrayQuery
     /**
      * @var array the data to search, filter.
      */
-    private $_data;
+    private $data;
     /**
      * @var array the array tokenized so user can search multidimensional array by key paths -ie `parentkey.child`
      */
-    private $_tokens;
+    private $tokens;
     /**
      * @var array the conditions to apply
      */
-    private $_conditions = [];
+    private $conditions = [];
 
 
     /**
@@ -45,9 +43,9 @@ class ArrayQuery
      */
     public function __construct(array $array)
     {
-        $this->_data = $array;
+        $this->data = $array;
         foreach ($array as $k => $item) {
-            $this->_tokens[$k] = $this->tokenize($item, '', false);
+            $this->tokens[$k] = $this->tokenize($item, '', false);
         }
     }
 
@@ -107,7 +105,7 @@ class ArrayQuery
                 default:
                     $condition = new Equal($value);
             }
-            $this->_conditions[$operator][] = ['condition' => $condition, 'key' => $key];
+            $this->conditions[$operator][] = ['condition' => $condition, 'key' => $key];
         }
         return $this;
     }
@@ -118,11 +116,11 @@ class ArrayQuery
      */
     public function one()
     {
-        foreach ($this->_tokens as $key => $token) {
+        foreach ($this->tokens as $key => $token) {
             if (!$this->matches($token)) {
                 continue;
             }
-            return $this->_data[$key];
+            return $this->data[$key];
         }
         return [];
     }
@@ -133,15 +131,15 @@ class ArrayQuery
      */
     public function find()
     {
-        if (empty($this->_conditions)) {
-            return $this->_data;
+        if (empty($this->conditions)) {
+            return $this->data;
         }
         $results = [];
-        foreach ($this->_tokens as $key => $token) {
+        foreach ($this->tokens as $key => $token) {
             if (!$this->matches($token)) {
                 continue;
             }
-            $results[$key] = $this->_data[$key];
+            $results[$key] = $this->data[$key];
         }
         return $results;
     }
@@ -187,7 +185,7 @@ class ArrayQuery
     private function matches($data)
     {
         $matches = true;
-        $conditions = isset($this->_conditions['and']) ? $this->_conditions['and'] : [];
+        $conditions = isset($this->conditions['and']) ? $this->conditions['and'] : [];
         foreach ($conditions as $condition) {
             $key = $condition['key'];
             $condition = $condition['condition'];
@@ -196,7 +194,7 @@ class ArrayQuery
                 break;
             }
         }
-        $conditions = isset($this->_conditions['or']) ? $this->_conditions['or'] : [];
+        $conditions = isset($this->conditions['or']) ? $this->conditions['or'] : [];
         foreach ($conditions as $condition) {
             $key = $condition['key'];
             $condition = $condition['condition'];

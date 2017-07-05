@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @copyright Copyright (c) 2013-2017 2amigOS! Consulting Group LLC
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
@@ -9,7 +9,7 @@ namespace dosamigos\arrayquery\conditions;
 /**
  * GreaterThan checks if value is greater than the data searched.
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @author Antonio Ramirez <hola@2amigos.us>
  * @link http://www.ramirezcobos.com/
  * @link http://www.2amigos.us/
  * @package dosamigos\arrayquery\conditions
